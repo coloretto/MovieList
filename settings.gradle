@@ -1,0 +1,4 @@
+include ':app'
+// 'app' 是module
+// 如果还有其他module都需要按照如上格式加进去。如下，就表示有两个module
+// include ':app', ':extras:ShimmerAndroid'

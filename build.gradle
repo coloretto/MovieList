@@ -1,0 +1,27 @@
+
+// 设置脚本的运行环境
+buildscript {
+    // 声明仓库的源
+    // 之前版本是mavenCentral()
+    // jCenter可以理解成是一个新的中央远程仓库，兼容maven中心仓库，而且性能更优
+    repositories {
+        jcenter()
+    }
+
+    // 声明了android gradle plugin的版本
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+    }
+}
+
+allprojects {
+    // 支持Java 依赖库管理（maven/ivy）,用于项目的依赖
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

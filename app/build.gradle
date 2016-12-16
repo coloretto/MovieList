@@ -1,0 +1,162 @@
+// 说明该module的构建类型
+// com.android.application为程序
+// com.android.library为库
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+
+// 设置编译android项目的参数
+android {
+    // SDK的一些声明，这里需要本地安装该版本
+    compileSdkVersion 25        // 编译的SDK版本
+    buildToolsVersion "24.0.2"  // 编译的build tools的版本，其中包括了打包工具aapt、dx等等这个工具的目录位于你的sdk目录/build-tools/下
+
+
+    // 默认配置
+    defaultConfig {
+        applicationId "com.neiliner.mymovie.mymovie"     // 应用包名
+        minSdkVersion 14    //支持的最低版本
+        targetSdkVersion 25 //支持的目标版本
+        versionCode 1   // 版本号，用户能看到的版本号
+        versionName "1.0"   // 版本名，内部定义的版本名
+
+        // JUnit是一个java单元测试框架，相关教程 http://www.yiibai.com/junit/eclise-junit-simple-demo.html
+        // 此行是单元测试相关的配置，谷歌推荐用这个，使用教程 http://blog.csdn.net/zhuhai__yizhi/article/details/47403723
+//      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    //关闭Android Studio的PNG合法性检查的
+//    aaptOptions.cruncherEnabled = false
+//    aaptOptions.useNewCruncher = false
+
+
+    // 指定资源的路径
+//    sourceSets {
+//        main {
+//            manifest.srcFile 'AndroidManifest.xml' //指定AndroidManifest文件
+//            java.srcDirs = ['src'] //指定source目录
+//            resources.srcDirs = ['src'] //指定source目录
+//            aidl.srcDirs = ['src'] //指定source目录
+//            renderscript.srcDirs = ['src'] //指定source目录
+//            res.srcDirs = ['res'] //指定资源目录
+//            assets.srcDirs = ['assets'] //指定assets目录
+//            jniLibs.srcDirs = ['libs'] //指定lib库目录
+//        }
+//        debug.setRoot('build-types/debug') //指定debug模式的路径
+//        release.setRoot('build-types/release') //指定release模式的路径
+//    }
+
+
+    //签名配置
+//    signingConfigs {
+//        release { //发布版签名配置
+//            storeFile file("fk.keystore") //密钥文件路径
+//            storePassword "123" //密钥文件密码
+//            keyAlias "fk" //key别名
+//            keyPassword "123" //key密码
+//        }
+//
+//        debug { //debug版签名配置
+//            storeFile file("fk.keystore")
+//            storePassword "123"
+//            keyAlias "fk"
+//            keyPassword "123"
+//        }
+//    }
+
+    // build类型
+    buildTypes {
+        // debug模式
+//      debug {
+//          signingConfig signingConfigs.release
+//      }
+
+        release {
+            minifyEnabled false       // 是否进行混淆
+//            zipAlignEnabled true  //是否支持zip
+//            shrinkResources true  // 移除无用的resource文件
+//            debuggable false  //是否支持调试
+            // signingConfig signingConfigs.release    //设置签名信息
+            // 混淆文件的位置
+            // 前一部分代表系统默认的混淆文件，该文件包含了基本的混淆声明，目录在 **/tools/proguard/proguard-android.txt** ,
+            // 后一部分是我们自定义的混淆文件，目录在 **app/proguard-rules.txt**，在这里可以声明一些第三方依赖的混淆规则。
+            // 最终混淆的结果是这两部分文件共同作用的
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+//    packagingOptions {
+//        exclude 'META-INF/ASL2.0'
+//        exclude 'META-INF/LICENSE'
+//        exclude 'META-INF/NOTICE'
+//        exclude 'META-INF/MANIFEST.MF'
+//    }
+
+
+    // 程序在编译的时候会检查lint，有任何错误提示会停止build，我们可以关闭这个开关
+//    lintOptions {
+//        abortOnError false    // 有错误是否停止build
+//        checkReleaseBuilds false    //打包release版本的时候是否进行检测
+//    }
+
+    //multiDex的一些相关配置，这样配置可以让你的编译速度更快
+//    dexOptions {
+//        preDexLibraries = false
+//        //让它不要对Lib做preDexing
+//        incremental true
+//        //开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。
+//        javaMaxHeapSize "4g"     //增加java堆内存大小
+//    }
+
+
+//    productFlavors {
+//        //在这里你可以设置你的产品发布的一些东西，
+//        //比如你现在一共软件需要发布到不同渠道，
+//        //且不同渠道中的包名不同，那么可以在此进行配置；
+//        //甚至可以设置不同的 AndroidManifest.xml 文件。
+//        xiaopao {
+//        }
+//        googlePlay {
+//        }
+//        solo {
+//        }
+//    }
+
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
+    //所谓ProductFlavors其实就是可定义的产品特性，
+    //配合 manifest merger 使用的时候就可以达成在一次编译
+    //过程中产生多个具有自己特性配置的版本。
+
+    //上面这个配置的作用就是，为每个渠道包产生不同的 UMENG_CHANNEL_VALUE 的值。
+
+//声明是要使用谷歌服务框架
+//    apply plugin: 'com.google.gms.google-services'
+
+
+    // java版本
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_7
+//        targetCompatibility JavaVersion.VERSION_1_7
+//    }
+}
+
+
+// 依赖
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')  // 编译libs目录下的所有jar包
+
+    testCompile 'junit:junit:4.12'
+    // 编译第三方库
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    // 每个Annotation处理器需要实现com.sun.mirror.apt包下的AnnotationProcessor接口。这里指定是谁做Annotation处理。as2.2以前版本这里用 apt
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+}
+
